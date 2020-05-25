@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/cart.css">
+    
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main>
+            <ul class="cart__item-list">
+                <% products.forEach(p => { %>
+                    <li class="cart__item">
+                        <h1><%= p.productId.title %></h1>
+                        <h2>Quantity: <%= p.quantity %></h2>
+                    </li>
+                <% }) %>
+            </ul>
+            <div class="centered">
+                <h2>Total: <%= totalPrice %></h2>
+            </div>
+            <div>
+                <button class="btn" id="checkout_btn">checkout</button>
+            </div>
+        </main>
+        <%- include('../includes/end.ejs') %>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script>
+            let stripe = Stripe("pk_test_g57DR8wgoD4gfbvk8iHWi7uS00mBAKxoDY")
+            let button = document.getElementById("checkout_btn")
+            console.log(button)
+            button.addEventListener("click", function() {
+                stripe.redirectToCheckout({
+                    sessionId: "<%=sessionId%>"
+                })  
+            })
+        </script>

@@ -1,0 +1,30 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+    <main>   
+        <form class="login-form" action="/signup" method="POST" novalidate>
+            <div class="form-control">
+                <label for="email">E-Mail</label>
+                <input class='<%=errors.email ? "invalid" : ""%>' type="email" name="email" id="email" value='<%= prevInputValue.email%>'>
+                <span><%=errors.email ? errors.email : ""%></span>
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input class='<%=errors.password ? "invalid" : ""%>' type="password" name="password" id="password" value='<%= prevInputValue.password%>'>
+                <span><%=errors.email ? errors.password : ""%></span>
+            </div>
+            <div class="form-control">
+                <label for="confirmPassword">Confirm Password</label>
+                <input class='<%=errors.confirmPassword ? "invalid" : ""%>' type="password" name="passwordConfirm" id="confirmPassword" value='<%= prevInputValue.passwordConfirm%>'>
+                <span><%=errors.email ? errors.passwordConfirm : ""%></span>
+            </div>
+            <input type="hidden" name="_csrf" value="<%=csrf%>" />
+            <button class="btn" type="submit">Signup</button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>
